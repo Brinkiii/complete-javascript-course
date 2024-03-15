@@ -226,6 +226,39 @@ const jonas = [
 
 // 0, 1, ..., 4
 // 4 , 3, ..., 0
-for (let i = jonas.length-1; i >= 0; i--) {
+// for (let i = jonas.length-1; i >= 0; i--) {
+//      console.log(i, jonas[i])
+// }
+
+// for (let exercise = 1; exercise <= 3; exercise++) {
+//    console.log(`-------- Starting exercise ${exercise}`)
    
-}
+//    for (let rep = 1; rep < 6; rep++) {
+//       console.log(`Lifting weights repetition ${rep}`)
+//    }
+// }
+
+
+// let rep = 1;
+// while (rep <= 10) {
+//    console.log(`Lifting weights repetition ${rep}`)
+//    rep++;
+// }
+
+// let dice = Math.trunc(Math.random() * 6) + 1
+
+// while (dice !== 6) {
+//    console.log(`You rolled a ${dice}`);
+//    dice = Math.trunc(Math.random() * 6) + 1;
+//    if (dice === 6) {
+//       console.log(`Loop is about to end... you got a 6`)
+//    }
+// }
+
+// function calcAverage(arr) {
+//    let sum = 0;
+//    for (let i = 0; i < arr.length; i++) {
+//        sum += arr[i];
+//    }
+//    return sum / arr.length
+// }
