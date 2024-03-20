@@ -165,3 +165,8 @@ main {
   font-weight: 700;
   color: #c7365f;
 }
+
+.btn:disabled {
+  filter: brightness(0.5);
+  pointer-events: none;
+}
