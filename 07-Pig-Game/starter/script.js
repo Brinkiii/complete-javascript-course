@@ -21,6 +21,8 @@ function newGame() {
   playerTwoCurrentScore.textContent = 0;
   btnRoll.disabled = false;
   btnHold.disabled = false;
+  winText.textContent = '';
+  playerOneActive();
 }
 
 function rollDice() {
@@ -39,29 +41,25 @@ function rollDice() {
     if (activePlayer === 0) {
       playerOneCurrentScore.textContent = 0;
       activePlayer = 1;
-      playerTwo.classList.add('player--active');
-      playerOne.classList.remove('player--active');
+      playerTwoActive();
     } else {
       playerTwoCurrentScore.textContent = 0;
       activePlayer = 0;
-      playerTwo.classList.remove('player--active');
-      playerOne.classList.add('player--active');
+      playerOneActive();
     }
   }
 }
 
 function hold() {
   if (activePlayer === 0) {
-    playerTwo.classList.add('player--active');
-    playerOne.classList.remove('player--active');
+    playerTwoActive();
     playerOneScore.textContent =
       parseInt(playerOneScore.textContent) +
       parseInt(playerOneCurrentScore.textContent);
     playerOneCurrentScore.textContent = 0;
     activePlayer = 1;
   } else {
-    playerTwo.classList.remove('player--active');
-    playerOne.classList.add('player--active');
+    playerOneActive();
     playerTwoScore.textContent =
       parseInt(playerTwoScore.textContent) +
       parseInt(playerTwoCurrentScore.textContent);
@@ -70,14 +68,12 @@ function hold() {
   }
   if (parseInt(playerOneScore.textContent) >= 100) {
     winText.textContent = 'Wins!';
-    playerTwo.classList.remove('player--active');
-    playerOne.classList.add('player--active');
+    playerOneActive();
     document.getElementById('name--0').appendChild(winText);
     disableButtons();
   } else if (parseInt(playerTwoScore.textContent) >= 100) {
     winText.textContent = 'Wins!';
-    playerTwo.classList.add('player--active');
-    playerOne.classList.remove('player--active');
+    playerTwoActive();
     document.getElementById('name--1').appendChild(winText);
     disableButtons();
   }
@@ -87,19 +83,27 @@ function switchPlayers() {
   if (thrownNumber === 1 && activePlayer === 0) {
     playerOneCurrentScore.textContent = 0;
     activePlayer = 1;
-    playerTwo.classList.add('player--active');
-    playerOne.classList.remove('player--active');
+    playerTwoActive();
   } else if (thrownNumber === 1 && activePlayer === 1) {
     playerTwoCurrentScore.textContent = 0;
     activePlayer = 0;
-    playerTwo.classList.remove('player--active');
-    playerOne.classList.add('player--active');
+    playerOneActive();
   }
 }
 
 function disableButtons() {
   document.querySelector('.btn--roll').disabled = true;
   document.querySelector('.btn--hold').disabled = true;
+}
+
+function playerOneActive() {
+  playerTwo.classList.remove('player--active');
+  playerOne.classList.add('player--active');
+}
+
+function playerTwoActive() {
+  playerTwo.classList.add('player--active');
+  playerOne.classList.remove('player--active');
 }
 
 btnRoll.addEventListener('click', rollDice);
