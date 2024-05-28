@@ -1,6 +1,6 @@
 'use strict';
 
-const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const openingHours = {
   [weekdays[3]]: {
     open: 12,
@@ -10,7 +10,7 @@ const openingHours = {
     open: 11,
     close: 23,
   },
-  [weekdays[5 ]]: {
+  [weekdays[5]]: {
     open: 0,
     close: 24,
   },
@@ -23,7 +23,7 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
   openingHours,
-  
+
   order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
@@ -44,29 +44,28 @@ const restaurant = {
   },
 };
 
-
 // PROPERTY NAMES
-const properties = Object.keys(openingHours)
-console.log(properties)
+const properties = Object.keys(openingHours);
+console.log(properties);
 
-let openStr = `We are open on ${properties.length} days: `
+let openStr = `We are open on ${properties.length} days: `;
 
 for (const day of properties) {
-  openStr += `${day}, `
+  openStr += `${day}, `;
 }
 
 // console.log(openStr)
 
 // PROPERTY VALUES
-const values = Object.values(openingHours)
+const values = Object.values(openingHours);
 // console.log(values)
 
 // ENTIRE OBJECT
 const entries = Object.entries(openingHours);
 // console.log(entries)
 
-for(const [key, {open, close}] of entries) {
-  console.log(`On ${key} we open at ${open} and close at ${close}`)
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
 
 // const rest1 = {
@@ -80,9 +79,8 @@ for(const [key, {open, close}] of entries) {
 //   owner: 'Giovanni Rossi',
 // }
 
-// if (restaurant.openingHours && restaurant.openingHours.mon) 
+// if (restaurant.openingHours && restaurant.openingHours.mon)
 //   console.log(restaurant.openingHours.mon.open)
-
 
 // console.log(restaurant.openingHours.mon?.open)
 // console.log(restaurant.openingHours?.mon?.open)
@@ -95,7 +93,7 @@ for(const [key, {open, close}] of entries) {
 
 // const users = [
 //   {
-//     name: "Leon", 
+//     name: "Leon",
 //     email: "leonbrinkmann14@gmail.com"
 //   }
 // ];
@@ -123,11 +121,7 @@ for(const [key, {open, close}] of entries) {
 //   console.log(`${i  + 1}: ${el}`)
 // }
 
-
-
-
 // restaurant.orderPizza(`Mushroom`, `Olive`, `spinach`);
-
 
 // restaurant.orderDelivery({
 //   time: '22:30',

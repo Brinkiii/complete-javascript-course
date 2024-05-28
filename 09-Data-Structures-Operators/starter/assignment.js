@@ -311,12 +311,12 @@ const books = [
 
 // printBookAuthorsCount("Algorithms", "Robert Sedgewick", "Kevin Wayne")
 
-// // 5.1 
+// // 5.1
 // function hasExamplesInJava(book) {
 //   return book.programmingLanguage === "Java" || "no data available"
 // }
 
-// console.log(hasExamplesInJava(books[0])) 
+// console.log(hasExamplesInJava(books[0]))
 
 // // 5.2
 // for (let i = 0; i<books.length; i++) {
@@ -328,7 +328,7 @@ const books = [
 //   books[i].onlineContent ?? console.log(`${books[i].title} provides no online content`);
 // }
 
-// // 7.1 
+// // 7.1
 // for (let i = 0; i<books.length; i++) {
 //   books[i].edition ||= 1;
 // }
@@ -379,7 +379,7 @@ const books = [
 
 // // 10.1
 // function getFirstKeyword(book) {
-//   console.log(book.keywords?.[0]) 
+//   console.log(book.keywords?.[0])
 // }
 
 // getFirstKeyword(books[0])
@@ -403,7 +403,7 @@ const books = [
 // // 11.3
 // const entries2 = Object.entries(books[0].thirdParty.goodreads);
 
-// // 11.4 
+// // 11.4
 // console.log(entries)
 // console.log(entries2)
 
@@ -511,30 +511,58 @@ GOOD LUCK 😀
 
 // console.log(scorers)
 
-// 12.1
-const allKeywords = [];
-for (const book of books) {
-  allKeywords.push(...book.keywords)
+// // 12.1
+// const allKeywords = [];
+// for (const book of books) {
+//   allKeywords.push(...book.keywords)
+// }
+// console.log(allKeywords)
+
+// // 12.2
+// const uniqueKeywords = new Set(allKeywords);
+// console.log(uniqueKeywords)
+
+// // 12.3
+// uniqueKeywords.add("coding")
+// uniqueKeywords.add("science")
+// console.log(uniqueKeywords)
+
+// // 12.4
+// uniqueKeywords.delete("business");
+// console.log(uniqueKeywords)
+
+// // 12.5
+// const uniqueKeywordsArr = [...uniqueKeywords]
+// console.log(uniqueKeywordsArr)
+
+// // 12.6
+// uniqueKeywords.clear();
+// console.log(uniqueKeywords)
+
+// // 13.1
+// const bookMap = new Map([
+//   ['title', 'Clean Code'],
+//   ['author', 'Robert C. Martin'],
+// ]);
+
+// // 13.2
+// bookMap.set('pages', 464);
+// console.log(bookMap);
+
+// // 13.3
+// console.log(`${bookMap.get('title')} by ${bookMap.get('author')}`);
+
+// // 13.4
+// console.log(bookMap.size);
+
+// // 13.5
+// if (bookMap.has('author')) console.log('The author is known');
+
+// 14.1
+const firstBookMap = new Map(Object.entries(books[0]));
+console.log(firstBookMap);
+
+// 14.2
+for (const [numberKeys, value] of firstBookMap) {
+  if (typeof value === 'number') console.log(numberKeys);
 }
-console.log(allKeywords)
-
-// 12.2
-const uniqueKeywords = new Set(allKeywords);
-console.log(uniqueKeywords)
-
-// 12.3
-uniqueKeywords.add("coding")
-uniqueKeywords.add("science")
-console.log(uniqueKeywords)
-
-// 12.4
-uniqueKeywords.delete("business");
-console.log(uniqueKeywords)
-
-// 12.5
-const uniqueKeywordsArr = [...uniqueKeywords]
-console.log(uniqueKeywordsArr)
-
-// 12.6
-uniqueKeywords.clear();
-console.log(uniqueKeywords)
