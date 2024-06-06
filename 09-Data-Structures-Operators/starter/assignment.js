@@ -558,11 +558,122 @@ GOOD LUCK 😀
 // // 13.5
 // if (bookMap.has('author')) console.log('The author is known');
 
-// 14.1
-const firstBookMap = new Map(Object.entries(books[0]));
-console.log(firstBookMap);
+// // 14.1
+// const firstBookMap = new Map(Object.entries(books[0]));
+// console.log(firstBookMap);
 
-// 14.2
-for (const [numberKeys, value] of firstBookMap) {
-  if (typeof value === 'number') console.log(numberKeys);
+// // 14.2
+// for (const [numberKeys, value] of firstBookMap) {
+//   if (typeof value === 'number') console.log(numberKeys);
+// }
+
+// // 15.1
+// console.log(books[0].ISBN['6']);
+// console.log(books[0].ISBN['4']);
+// console.log(books[0].ISBN['9']);
+// console.log(books[0].ISBN['8']);
+
+// // 15.2
+// const quote =
+//   'A computer once beat me at chess, but it was no match for me at kick boxing';
+// console.log(quote.indexOf('chess'));
+
+// // 15.3
+// console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+
+// // 15.4
+// function isContributor(authorName) {
+//   authorName.slice(authorName.lastIndexOf(' ') + 1) === '(Contributor)'
+//     ? console.log(true)
+//     : console.log(false);
+// }
+
+// function isContributorJonas(authorName) {
+//   return authorName.lastIndexOf('(Contributor)') !== -1;
+// }
+
+// isContributor('Julia Sussman (Contributor)');
+// isContributorJonas('Julia Sussman (Contributor)');
+
+// const test = 'Test String mit Last Index';
+// console.log(test.lastIndexOf(' '));
+
+// // 16.1
+// const normalizeAuthorName = function (author) {
+//   const lowerName = author.toLowerCase().trim().replace('(contributor)', '');
+//   const firstName =
+//     lowerName[0].toUpperCase() + lowerName.slice(1, lowerName.indexOf(' '));
+//   const lastName =
+//     lowerName[lowerName.indexOf(' ') + 1].toUpperCase() +
+//     lowerName.slice(lowerName.indexOf(' ') + 2);
+//   console.log(`${firstName} ${lastName}`);
+// };
+
+// normalizeAuthorName('JuLIA sAssman (Contributor)');
+
+// // 16.2
+// // const title = books[1].title;
+// // console.log(title);
+// // const newBookTitle = title.replace('Programs', 'Software');
+// // console.log(newBookTitle);
+// const newBookTitle = books[1].title.replace('Programs', 'Software');
+
+// // 16.3
+// function logBookTheme(title) {
+//   title = title.toLowerCase();
+//   if (title.startsWith('computer')) {
+//     console.log('This book is about computers');
+//   } else if (title.includes('algorithms') && title.includes('structures')) {
+//     console.log('This book is about algorithms and data structures');
+//   } else if (
+//     title.endsWith('systems') ||
+//     (title.endsWith('system') && !title.includes('operating'))
+//   ) {
+//     console.log(
+//       'This book is about some systems, but definitely not operating systems.'
+//     );
+//   }
+// }
+// console.log(logBookTheme('Algorithms and data structures'));
+
+// // 17.1
+// const bookCategories =
+//   'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+
+// function logBookCategories(categories) {
+//   const split = categories.split(';');
+//   for (const n of split) {
+//     console.log(n);
+//   }
+// }
+// logBookCategories(bookCategories);
+
+// 17.2
+function getKeywordsAsString(books) {
+  const keywords = [];
+  for (const book of books) {
+    keywords.push(...book.keywords);
+  }
+  // const keywordsSet = new Set(keywords);
+  // console.log(Array.from(keywordsSet).join(';'));
+  const uniqueKeywords = [...new Set(keywords)];
+  return uniqueKeywords.join(';');
 }
+
+console.log(getKeywordsAsString(books));
+
+// 17.3
+const bookChapters = [
+  ['The Basics', 14],
+  ['Sorting', 254],
+  ['Searching', 372],
+  ['Graphs', 526],
+  ['Strings', 706],
+];
+function logBookChapters(arr) {
+  for (const [title, pages] of arr) {
+    console.log(`${title.padEnd(16, '_')}${pages}`);
+  }
+}
+
+logBookChapters(bookChapters);
