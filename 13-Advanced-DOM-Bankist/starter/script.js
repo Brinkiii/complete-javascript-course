@@ -18,6 +18,8 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+
 for (let i = 0; i < btnsOpenModal.length; i++)
   btnsOpenModal[i].addEventListener('click', openModal);
 
@@ -29,3 +31,15 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+
+document.querySelector('header');
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
+
+document.getElementById('section--1');
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons);

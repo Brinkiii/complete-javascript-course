@@ -61,9 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -168,6 +171,46 @@ btnTransfer.addEventListener('click', function (e) {
     // Update UI
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount / 10)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    // Delete account
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 ////////////////////////////////////////////////
@@ -341,3 +384,171 @@ for (const account of accounts) {
   if (account.owner === 'Jessica Davis') accObject = account;
 }
 console.log(accObject);
+
+console.log(movements);
+
+// EQUALITY
+console.log(movements.includes(-130));
+
+// SOME: CONDITION
+console.log(movements.some(mov => mov === -130));
+
+const anyDeposits = movements.some(mov => mov > 5000);
+console.log(anyDeposits);
+
+// EVERY
+console.log('EVERY');
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate Callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
+
+// FLAT
+console.log('FLAT');
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+// flat
+const overalBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flatMap
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// Sorting Arrays
+
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+
+// Numbers
+console.log(movements);
+
+// return < 0, A, B
+// return > 0, B, A
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+
+console.log(movements);
+
+const arrFill = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+const x = new Array(7);
+console.log(x);
+// console.log(x.map(() => 5));
+// x.fill(1);
+x.fill(1, 3);
+console.log(x);
+
+arrFill.fill(23, 4, 6);
+console.log(arrFill);
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const randomDiceRoll = Array.from(
+  { length: 100 },
+  (_, i) => Math.floor(Math.random() * 6) + 1
+);
+console.log(randomDiceRoll);
+
+const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
+
+labelBalance.addEventListener('click', function (e) {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+});
+
+// 1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+// 2. How many deposits in the whole bank, with at least a 1000 dollars
+const thousandDollars = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov >= 1000).length;
+console.log(thousandDollars);
+
+// or
+
+const thousandDollars2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, cur) => (cur >= 1000 ? acc + 1 : acc), 0);
+console.log(thousandDollars);
+
+// 3.
+const { deposits2, withdrawals2 } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur >= 0 ? (sums.deposits2 += cur) : (sums.withdrawals2 += cur);
+      sums[cur > 0 ? 'deposits2' : 'withdrawals2'] += cur;
+      return sums;
+    },
+    { deposits2: 0, withdrawals2: 0 }
+  );
+
+console.log(deposits2, withdrawals2);
+
+// 4.
+// this is a nice title -> This Is a Nice Title
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+
+  return capitalize(titleCase);
+};
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
