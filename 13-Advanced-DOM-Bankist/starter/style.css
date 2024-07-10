@@ -14,6 +14,11 @@
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
 }
 
+::selection {
+  background: #5ec576;
+  color: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,6 +28,8 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 body {
