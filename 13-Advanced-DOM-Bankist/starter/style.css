@@ -129,12 +129,15 @@ img {
   width: 100%;
   padding: 0 6rem;
   z-index: 100;
+  transition: ease all .2s;
 }
 
 /* nav and stickly class at the same time */
 .nav.sticky {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.95);
+  transition: ease all .2s;
+
 }
 
 .nav__logo {

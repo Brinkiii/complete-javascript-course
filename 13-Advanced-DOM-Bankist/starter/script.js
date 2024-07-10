@@ -9,6 +9,11 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
 
 btnScrollTo.addEventListener('click', function (e) {
   // const s1coords = section1.getBoundingClientRect();
@@ -88,10 +93,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 // Tabbed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
 // tabs.forEach(t =>
 //   t.addEventListener('click', () => {
 //     console.log('TAB');
@@ -117,6 +118,52 @@ tabsContainer.addEventListener('click', e => {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// Menu fade animation
+const handleHover = function(e, opacity) {
+  if(e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img')
+
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity
+  }
+}
+
+// Passing "argument" into handler
+nav.addEventListener('mouseover', (e) => {
+  handleHover(e, 0.5)
+})
+
+nav.addEventListener('mouseout', (e) => {
+  handleHover(e, 1)
+})
+
+// // Sticky Navigation
+// window.addEventListener('scroll', function(e) {
+//   console.log(window.scrollY);
+//   window.scrollY > 0 ? nav.classList.add('sticky') : nav.classList.remove('sticky')
+// })
+
+// Sticky navigation: Intersection Observer API
+
+const observerCallback = function(entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  })
+}
+ 
+const observerOptions = {
+  root: null,
+  threshold: 0.1,
+  
+}
+
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+observer.observe(section1);
 
 // // Selecting elements
 // console.log(document.documentElement);
@@ -264,33 +311,33 @@ tabsContainer.addEventListener('click', e => {
 //   console.log('NAV', e.target);
 // });
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-// going downwards: child
-console.log(h1.querySelectorAll('.highlight'));
-console.log(h1.childNodes);
-console.log(h1.children);
-console.log(h1.firstChild);
-console.log(h1.firstElementChild);
-h1.firstElementChild.style.color = 'white';
-h1.lastElementChild.style.color = 'orangered';
+// // going downwards: child
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// console.log(h1.firstChild);
+// console.log(h1.firstElementChild);
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
 
-// Going upwards: parents
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// // Going upwards: parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
-// closest finds parents, querySelector finds children
-h1.closest('.header').style.background = 'var(--gradient-secondary)';
-h1.closest('h1').style.background = 'var(--gradient-primary)';
+// // closest finds parents, querySelector finds children
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+// h1.closest('h1').style.background = 'var(--gradient-primary)';
 
-// Going sideways: siblings
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+// // Going sideways: siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
 
-console.log(h1.parentElement.children);
-[...h1.parentElement.children].forEach(function (el) {
-  if (el !== h1) el.style.transform = 'scale(0.5)';
-});
+// console.log(h1.parentElement.children);
+// [...h1.parentElement.children].forEach(function (el) {
+//   if (el !== h1) el.style.transform = 'scale(0.5)';
+// });
